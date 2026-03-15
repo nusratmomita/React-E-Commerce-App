@@ -1,2 +1,25 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* 0A400C -> dark green */
+
+
+.section_title::before,
+.section_title::after{
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 2px;
+    background: rgb(0,0,12);
+    top: 60%;
+}
+
+.section_title::before{
+    right: 50%;
+    margin-right: 70px;
+}
+
+.section_title::after{
+    left: 50%;
+    margin-left: 70px;
+}
