@@ -3,6 +3,7 @@
     "id": 1,
     "name": "Camera",
     "image": "https://i.ibb.co.com/wh8c98zV/andrew-hutchings-W2-Dta-Yiwfw-unsplash.jpg",
+    "detail_image":"https://i.ibb.co.com/NdvxkyV7/math-lf-Rlv3nuf78-unsplash.jpg",
     "description": "Professional DSLR camera for high quality photography.",
     "price": 150,
     "rating": 3.0,
@@ -11,12 +12,14 @@
     "brand": "Canon",
     "stock": 20,
     "discount": 5,
-    "reviews": 34
+    "reviews": 34,
+    "vendor_company": "XYZ Technology"
   },
   {
     "id": 2,
     "name": "Headphones",
     "image": "https://i.ibb.co.com/ZpZjgbL8/tomasz-gawlowski-YDZPdqv3-Fc-A-unsplash.jpg",
+    "detail_image":"https://i.ibb.co.com/YBYbtfPN/c-d-x-PDX-a-82obo-unsplash.jpg",
     "description": "Noise cancelling wireless headphones with deep bass.",
     "price": 80,
     "rating": 4,
@@ -25,12 +28,14 @@
     "brand": "Sony",
     "stock": 35,
     "discount": 10,
-    "reviews": 120
+    "reviews": 120,
+    "vendor_company": "Arms Technology"
   },
   {
     "id": 3,
     "name": "Smart Watch",
-    "image": "https://i.ibb.co.com/4g4WJjzf/jens-kreuter-PKnn-n-XCNhs-unsplash.jpg",
+    "image":"https://i.ibb.co.com/0pHKNRc3/simon-daoudi-2w-Foa040m8g-unsplash.jpg",
+    "detail_image": "https://i.ibb.co.com/4g4WJjzf/jens-kreuter-PKnn-n-XCNhs-unsplash.jpg",
     "description": "Smart watch with health tracking and notifications.",
     "price": 120,
     "rating": 3,
@@ -39,12 +44,14 @@
     "brand": "Apple",
     "stock": 15,
     "discount": 8,
-    "reviews": 76
+    "reviews": 76,
+    "vendor_company": "Zebra Technology"
   },
   {
     "id": 4,
     "name": "Laptop",
     "image": "https://i.ibb.co.com/RpSN3pbK/kari-shea-1-SAnr-Ixw5-OY-unsplash.jpg",
+    "detail_image": "https://i.ibb.co.com/x06BQp9/alex-knight-j4uu-Kn-N43-M-unsplash.jpg",
     "description": "Smart Laptop with better battery health and AI powered.",
     "price": 900,
     "rating": 2,
@@ -53,12 +60,14 @@
     "brand": "Dell",
     "stock": 12,
     "discount": 12,
-    "reviews": 60
+    "reviews": 60,
+    "vendor_company": "Yaa Technologies"
   },
   {
     "id": 5,
     "name": "Gaming Mouse",
     "image": "https://i.ibb.co.com/8nZcw1RT/maar-gaming-Pv-vb5vwz-Q-unsplash.jpg",
+    "detail_image": "https://i.ibb.co.com/DH8M08XM/rebekah-yip-w-MT0oi-L5-Xj-A-unsplash.jpg",
     "description": "High precision gaming mouse with RGB lighting.",
     "price": 40,
     "rating": 3,
@@ -67,12 +76,14 @@
     "brand": "Logitech",
     "stock": 50,
     "discount": 6,
-    "reviews": 110
+    "reviews": 110,
+    "vendor_company": "ABC Technology"
   },
   {
     "id": 6,
     "name": "Keyboard",
     "image": "https://i.ibb.co.com/XkYpJz7t/clay-banks-PXa-QXTh-G1-FY-unsplash.jpg",
+    "detail_image": "https://i.ibb.co.com/q34LqVsM/sergi-kabrera-2x-U7r-Yxs-Ti-M-unsplash.jpg",
     "description": "Mechanical keyboard with tactile switches.",
     "price": 70,
     "rating": 4,
@@ -81,12 +92,14 @@
     "brand": "Corsair",
     "stock": 30,
     "discount": 7,
-    "reviews": 65
+    "reviews": 65,
+    "vendor_company": "Smart Technology"
   },
   {
     "id": 7,
     "name": "Smartphone",
     "image": "https://i.ibb.co.com/gFZftdcs/jonas-leupe-w-K-elt11p-F0-unsplash.jpg",
+    "detail_image": "https://i.ibb.co.com/0Vh350x1/jonas-leupe-w-K-elt11p-F0-unsplash.jpg",
     "description": "Latest smartphone with powerful performance.",
     "price": 650,
     "rating": 4,
@@ -95,12 +108,14 @@
     "brand": "Samsung",
     "stock": 22,
     "discount": 9,
-    "reviews": 200
+    "reviews": 200,
+    "vendor_company": "Idea Technology"
   },
   {
     "id": 8,
     "name": "Tablet",
     "image": "https://i.ibb.co.com/JRD7jG3D/serwin365-0c-G-y-QAd-YIM-unsplash.jpg",
+    "detail_image": "https://i.ibb.co.com/7dBSW1rn/kelly-sikkema-4x-Hgz-Zll-Qs-unsplash.jpg",
     "description": "Portable tablet perfect for entertainment and work.",
     "price": 350,
     "rating": 3,
@@ -109,12 +124,14 @@
     "brand": "Lenovo",
     "stock": 18,
     "discount": 11,
-    "reviews": 58
+    "reviews": 58,
+    "vendor_company": "WWW Technology"
   },
   {
     "id": 9,
     "name": "Bluetooth Speaker",
     "image": "https://i.ibb.co.com/dwgP1v6z/nicolas-j-leclercq-gb-G65g-RAGx4-unsplash.jpg",
+    "detail_image": "https://i.ibb.co.com/ZzcgKKDc/nejc-soklic-g5-Y5kj-Ow-Gw-Q-unsplash.jpg",
     "description": "Portable bluetooth speaker with powerful sound.",
     "price": 55,
     "rating": 4,
@@ -123,12 +140,14 @@
     "brand": "JBL",
     "stock": 40,
     "discount": 5,
-    "reviews": 90
+    "reviews": 90,
+    "vendor_company": "Stacky Technology"
   },
   {
     "id": 10,
     "name": "Drone",
     "image": "https://i.ibb.co.com/B29pP8gM/alessio-soggetti-r-SFx-BGpnluw-unsplash.jpg",
+    "detail_image": "https://i.ibb.co.com/pvcqJ7mp/karl-greif-H5-IXIH254-AU-unsplash.jpg",
     "description": "4K camera drone for aerial photography.",
     "price": 500,
     "rating": 4.5,
@@ -137,6 +156,7 @@
     "brand": "DJI",
     "stock": 10,
     "discount": 13,
-    "reviews": 40
+    "reviews": 40,
+    "vendor_company": "XYZ Technology"
   }
 ]

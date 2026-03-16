@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import siteLogo from '../assets/e-commerceIcon.png';
 import { PiShoppingCartBold } from "react-icons/pi";
-import { getItemsFromLS } from '../Utilities/localStoreageUlility';
+import { getItemsFromLS } from '../Utilities/localStorageUtility';
 import { NavLink } from 'react-router';
 
 const Navbar = () => {

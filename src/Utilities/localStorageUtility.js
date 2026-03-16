@@ -30,10 +30,10 @@ export const addToLS = (item) => {
     }
 }
 
-export const removingFromLS = (id) => {
+export const removingFromLS = (productId) => {
     const existingItems = getItemsFromLS();
 
-    const remainingItems = existingItems.filter((i) => i.id !== id);
+    const remainingItems = existingItems.filter((i) => i.productId !== productId);
 
     const addingToLS = JSON.stringify(remainingItems);
     localStorage.setItem("items" , addingToLS);
