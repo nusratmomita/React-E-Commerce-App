@@ -45,6 +45,7 @@
     "id": 4,
     "name": "Laptop",
     "image": "https://i.ibb.co.com/RpSN3pbK/kari-shea-1-SAnr-Ixw5-OY-unsplash.jpg",
+    "description": "Smart Laptop with better battery health and AI powered.",
     "price": 900,
     "rating": 2,
     "totalBuys": 90,

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import ProductsPage from "../Pages/ProductsPage";
 import Root from "../Root/Root";
+import MyCart from "../Pages/MyCart";
 
 export const router = createBrowserRouter([
     {
@@ -11,6 +12,10 @@ export const router = createBrowserRouter([
                 index: true,
                 loader: () => fetch("/productsData.json"),
                 Component: ProductsPage
+            },
+            {
+                path: "/myCart",
+                Component: MyCart
             }
         ]
     }

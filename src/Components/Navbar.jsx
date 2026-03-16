@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import siteLogo from '../assets/e-commerceIcon.png';
 import { PiShoppingCartBold } from "react-icons/pi";
+import { getItemsFromLS } from '../Utilities/localStoreageUlility';
+import { NavLink } from 'react-router';
 
 const Navbar = () => {
+
+  const [allItems , setAllItems] = useState([]);
+  
+  useEffect(()=>{
+    const updateCart = () => {
+      const items = getItemsFromLS();
+      setAllItems(items);
+  };
+
+  updateCart();
+
+  window.addEventListener("cartUpdated", updateCart);
+
+  return () => {
+    window.removeEventListener("cartUpdated", updateCart);
+  };
+  },[])
+
   return (
     <div className="navbar bg-base-100 shadow-sm px-5">
       <div className="navbar-start">
@@ -23,11 +43,18 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li className='text-xl font-bold'>All Products</li>
+          <li className='text-xl font-bold'> <NavLink to='/'>All Products</NavLink></li>
         </ul>
       </div>
       <div className="navbar-end">
-        <PiShoppingCartBold className='text-xl mr-4'></PiShoppingCartBold>
+        <NavLink to='/myCart' className='relative cursor-pointer'>
+          <PiShoppingCartBold className='text-3xl mr-4'></PiShoppingCartBold>
+          {allItems.length > 0 && (
+            <h4 className="absolute -top-3 right-1.5 text-xl font-semibold">
+              {allItems.length}
+            </h4>
+          )}
+        </NavLink>
         <a className="btn">Logout</a>
       </div>
     </div>
