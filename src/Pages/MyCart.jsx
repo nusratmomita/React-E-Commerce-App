@@ -108,7 +108,7 @@ const MyCart = () => {
                     <td className="text-lg flex gap-2 justify-center items-center">
                       <button 
                         onClick={() => handleDelete(item.productId)} 
-                        className="btn btn-md bg-[#0A400C] text-white hover:-translate-y-2 transition-all duration-300 group"
+                        className="btn btn-md bg-[#0A400C] text-white border border-transparent hover:border-[#0A400C] hover:bg-transparent hover:text-[#0A400C] hover:-translate-y-2 transition-all duration-300 group"
                       >
                         <IoTrashBinOutline className='group-hover:rotate-18'></IoTrashBinOutline>
                         Delete
