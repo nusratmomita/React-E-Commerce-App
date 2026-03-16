@@ -43,13 +43,39 @@ const MyCart = () => {
     });
   }
 
+  // for updating quantity
+  const updateQuantity = (productId , type) => {
+    const updateItems = allCartItems.map((item) => {
+      if(item.productId === productId){
+        if(type === 'increase'){
+          return {...item , productQuantity: item.productQuantity + 1}
+        }
+
+        if(type === 'decrease' && item.productQuantity > 1){
+          return {...item , productQuantity: item.productQuantity - 1}
+        }
+
+      }
+
+      return item;
+    });
+
+    setAllCartItems(updateItems);
+    localStorage.setItem("items",JSON.stringify(updateItems));
+
+    window.dispatchEvent(new Event("cartUpdated"));
+  }
+  
+  const totalPrice = allCartItems.reduce((total,item) => total + item.productQuantity * item.productPrice , 0 );
+
+  console.log(totalPrice)
   
   return (
     <div>
       {
         allCartItems.length === 0 ?
-        <div className='mt-50 flex flex-col justify-center items-center'>
-          <h3 className='text-3xl font-semibold text-black'>There is no item in the cart</h3>
+        <div className='mt-30 lg:mt-50 flex flex-col justify-center items-center'>
+          <h3 className='text-xl md:text-2xl lg:text-3xl font-semibold text-black'>There is no item in the cart</h3>
           <button> <NavLink className='btn btn-md bg-[#0A400C] text-white mt-5 border border-transparent hover:border-[#0A400C] hover:bg-transparent hover:text-[#0A400C]' to='/'><PiShoppingCartBold className='text-xl'></PiShoppingCartBold>Add Items</NavLink></button>
         </div>
         :
@@ -72,13 +98,13 @@ const MyCart = () => {
                   <tr key={item.productId}>
                     <td className='text-lg text-center'>{index+1}</td>
                     <td className='text-lg text-center whitespace-nowrap'>{item.productName}</td>
-                    <td className='text-lg text-center whitespace-nowrap'>{item.productPrice}</td>
+                    <td className='text-lg text-center whitespace-nowrap'>{item.productPrice*item.productQuantity}</td>
                     <td className='text-lg flex justify-center items-center gap-2'>
-                      <FiMinus className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-2xl p-1'></FiMinus>
-                      <span>1</span>
-                      <FaPlus className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-2xl p-1'></FaPlus>
+                      <FiMinus onClick={() => updateQuantity(item.productId , "decrease")} className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-2xl p-1'></FiMinus>
+                      <span>{item.productQuantity}</span>
+                      <FaPlus onClick={() => updateQuantity(item.productId , "increase")} className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-2xl p-1'></FaPlus>
                     </td>
-                    <td className='text-lg text-center'>{item.addedOn}</td>
+                    <td className='text-lg text-center whitespace-nowrap'>{item.addedOn}</td>
                     <td className="text-lg flex gap-2 justify-center items-center">
                       <button 
                         onClick={() => handleDelete(item.productId)} 
@@ -91,6 +117,11 @@ const MyCart = () => {
                   </tr>
                 )
                 )}
+              <tr className="font-bold text-lg bg-gray-200">
+                <td colSpan="1" className="text-left">Total</td>
+                <td colSpan="6" className="text-right">${totalPrice}</td>
+                {/* <td colSpan="4"></td> */}
+              </tr>
             </tbody>
             </table>
           </div>

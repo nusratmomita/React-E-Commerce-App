@@ -33,11 +33,11 @@ const Navbar = () => {
           <ul
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-            <li>All Products</li>
+            <li className='text-xl font-bold'> <NavLink to='/'>All Products</NavLink></li>
           </ul>
         </div>
         <div className='flex justify-center items-center'>
-          <img className='w-12 h-12 -mr-1' src={siteLogo} alt="siteLogo" />
+          <img className='w-12 h-12 -mr-1 hidden lg:block' src={siteLogo} alt="siteLogo" />
           <a className="text-xl font-bold italic text-[#0A400C]">Shopify</a>
         </div>
       </div>
@@ -48,9 +48,9 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <NavLink to='/myCart' className='relative cursor-pointer'>
-          <PiShoppingCartBold className='text-3xl mr-4'></PiShoppingCartBold>
+          <PiShoppingCartBold className='text-xl lg:text-3xl mr-4'></PiShoppingCartBold>
           {allItems.length > 0 && (
-            <h4 className="absolute -top-3 right-1.5 text-xl font-semibold">
+            <h4 className="absolute -top-3 right-1.5 text-md lg:text-xl font-semibold">
               {allItems.length}
             </h4>
           )}

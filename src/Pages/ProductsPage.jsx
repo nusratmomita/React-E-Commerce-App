@@ -38,9 +38,9 @@ const ProductsPage = () => {
     <>
       <ToastContainer position="bottom-left"></ToastContainer>
       <div className='my-15'>
-        <h2 className='section_title text-center text-3xl font-bold mb-2 text-[#0A400C] relative'>Products</h2>
-        <p className='text-xl font-medium text-center w-162.5 mx-auto mb-15'>Lorem Ipsum has been the industry's standard dummy text, when an unknown printer took a galley of type and scrambled it</p>
-        <div className='grid gap-3.75 grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+        <h2 className='section_title text-center text-2xl lg:text-3xl font-bold mb-2 text-[#0A400C] relative'>Products</h2>
+        <p className='text-lg lg:text-xl font-medium text-center lg:w-162.5 mx-auto mb-15 px-2 md:px-2 lg:px-0'>Lorem Ipsum has been the industry's standard dummy text, when an unknown printer took a galley of type and scrambled it</p>
+        <div className='grid gap-3.75 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 md:px-10 lg:px-10 xl:px-0'>
           {productData.map((product) => (
             <div key={product.id} className='p-3 rounded-sm border border-gray-600 cursor-pointer group hoverr:bg-[#0a400C]/75 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl'>
               <div className='object-cover transition-transform duration-300 group-hover:scale-104 relative'>
@@ -60,11 +60,11 @@ const ProductsPage = () => {
                 </div>
 
                 <div className='flex gap-1 items-center text-xl'>
-                  <h4 className='text-lg font-medium text-gray-600 group-hoverr:text-white'>Average Rating:</h4>
+                  <h4 className='text-md md:text-lg lg:text-lg font-medium text-gray-600 group-hoverr:text-white'>Average Rating:</h4>
                   {[1,2,3,4,5].map((star) => (
                     <span key={star}>
                       {
-                        star <= product.rating ? <FaStar className='text-green-900 group-hoverr:text-white'/> : <FaRegStar className='group-hoverr:text-white'/>
+                        star <= product.rating ? <FaStar className='text-green-900 text-lg md:text-xl lg:text-xl group-hoverr:text-white'/> : <FaRegStar className='text-lg md:text-xl lg:text-xl group-hoverr:text-white'/>
                       }
                     </span>
                   ))}
@@ -94,25 +94,25 @@ const ProductsPage = () => {
               selectedProduct && 
               <>
                 <img src={selectedProduct.detail_image} alt="detailImage" />
-                <p className='font-semibold text-lg mb-3 text-[#0A400C] mt-2'>Item Description: <span className='text-black font-normal not-italic'>{selectedProduct.description}</span></p>
+                <p className='font-semibold text-md md:text-lg lg:text-lg mb-5 text-[#0A400C] mt-2'>Item Description: <span className='text-black font-normal not-italic'>{selectedProduct.description}</span></p>
 
                 <div className='grid grid-cols-1 gap-y-1'>
-                  <div className='flex justify-between items-center gap-2'>
-                    <h3 className='w-75 font-semibold italic bg-[#0A400C] text-yellow-100 p-3 rounded-lg'>Category:  <span className='font-normal not-italic'>{selectedProduct.category}</span></h3>
-                    <h3 className='w-75 font-semibold italic bg-[#0A400C] text-yellow-100 p-3 rounded-lg'>Brand:  <span className='font-normal not-italic'>{selectedProduct.brand}</span></h3>
+                  <div className='flex justify-between items-center gap-2 flex-col md:flex-row lg:flex-row'>
+                    <h3 className='text-center md:text-left lg:text-left w-full lg:w-75 font-semibold italic bg-[#0A400C] text-yellow-100 p-3 rounded-lg'>Category:  <span className='font-normal not-italic'>{selectedProduct.category}</span></h3>
+                    <h3 className='text-center md:text-left lg:text-left w-full lg:w-75 font-semibold italic bg-[#0A400C] text-yellow-100 p-3 rounded-lg'>Brand:  <span className='font-normal not-italic'>{selectedProduct.brand}</span></h3>
                   </div>
 
-                  <div className='flex justify-around items-center gap-2'>
-                    <h3 className='w-75 font-semibold italic bg-[#0A400C] text-yellow-100 p-3 rounded-lg'>Total Buys: <span className='font-normal not-italic'>{selectedProduct.totalBuys}</span></h3>
-                    <h3 className='w-75 font-semibold italic bg-[#0A400C] text-yellow-100 p-3 rounded-lg'>Total Reviews: <span className='font-normal not-italic'>{selectedProduct.reviews}</span></h3>
+                  <div className='flex justify-between items-center gap-2 flex-col md:flex-row lg:flex-row2'>
+                    <h3 className='text-center md:text-left lg:text-left w-full lg:w-75 font-semibold italic bg-[#0A400C] text-yellow-100 p-3 rounded-lg'>Total Buys: <span className='font-normal not-italic'>{selectedProduct.totalBuys}</span></h3>
+                    <h3 className='text-center md:text-left lg:text-left w-full lg:w-75 font-semibold italic bg-[#0A400C] text-yellow-100 p-3 rounded-lg'>Total Reviews: <span className='font-normal not-italic'>{selectedProduct.reviews}</span></h3>
                   </div>
                 </div>  
 
-                <h3 className='mt-5 font-semibold text-lg text-[#0A400C]'>Max Discount: <span className='text-black font-normal not-italic'>{selectedProduct.discount}%</span></h3>
+                <h3 className='mt-5 font-semibold text-md md:text-lg lg:text-lg text-[#0A400C]'>Max Discount: <span className='text-black font-normal not-italic'>{selectedProduct.discount}%</span></h3>
 
-                <h3 className='font-semibold text-lg text-[#0A400C]'>Vendor: <span className='text-black font-normal not-italic'>{selectedProduct.vendor_company}</span></h3>
+                <h3 className='font-semibold text-md md:text-lg lg:text-lg text-[#0A400C]'>Vendor: <span className='text-black font-normal not-italic'>{selectedProduct.vendor_company}</span></h3>
 
-                <h3 className='font-semibold text-lg mb-5 text-[#0A400C]'>In stock: <span className='text-black font-normal not-italic'>{selectedProduct.stock}</span></h3>
+                <h3 className='font-semibold text-md md:text-lg lg:text-lg mb-5 text-[#0A400C]'>In stock: <span className='text-black font-normal not-italic'>{selectedProduct.stock}</span></h3>
 
                 <form method="dialog" className='flex gap-3'>
                   <button 
