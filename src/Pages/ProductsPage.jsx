@@ -31,6 +31,7 @@ const ProductsPage = () => {
 
     else{
       toast.success("You successfully added a new item!");
+      
     }
   }
 
