@@ -32,8 +32,8 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-            <li className='text-xl font-bold'> <NavLink to='/'>All Products</NavLink></li>
+            className="menu menu-sm dropdown-content bg-base-100 z-1 mt-3 w-52 p-2 shadow">
+            <li className='font-bold hover:bg-none'> <NavLink className="text-lg" to='/'>All Products</NavLink></li>
           </ul>
         </div>
         <div className='flex justify-center items-center'>
@@ -55,7 +55,7 @@ const Navbar = () => {
             </h4>
           )}
         </NavLink>
-        <a className="btn">Logout</a>
+        <a className="btn ml-2  bg-transparent text-gray-800 border-2 border-[#0A400C] rounded-lg p-4 cursor-pointer hover:bg-[#0A400C] hover:text-white transition-all duration-300">Logout</a>
       </div>
     </div>
   )
