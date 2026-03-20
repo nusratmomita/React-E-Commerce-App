@@ -54,9 +54,8 @@ const MyCart = () => {
         if(type === 'decrease' && item.productQuantity > 1){
           return {...item , productQuantity: item.productQuantity - 1}
         }
-
       }
-
+      
       return item;
     });
 

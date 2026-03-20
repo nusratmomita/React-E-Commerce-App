@@ -9,10 +9,18 @@ const ProductsPage = () => {
   const productData = useLoaderData();
   // console.log(productData);
 
+  // for changing the stock number
+  const [loadedProducts,setLoadedProducts] = useState(productData);
+
   // for details modal
   const [selectedProduct,setSelectedProduct] = useState(null);
 
   const addItems = (product) => {
+
+    if(product.stock <= 0){
+      toast.error("This product is out of stock right now.")
+      return;
+    }
 
     const newItem = {
       productId: product.id,
@@ -31,6 +39,19 @@ const ProductsPage = () => {
 
     else{
       toast.success("You successfully added a new item!");
+
+      const updateProductStock = loadedProducts.map((p) => {
+        if(p.id === product.id){
+          return{...p , stock: p.stock - 1};
+        }
+        return p;
+      });
+
+      setLoadedProducts(updateProductStock);
+
+      setSelectedProduct((prev) =>
+        prev ? { ...prev, stock: prev.stock - 1 } : prev
+      );
     }
   }
 
@@ -41,51 +62,56 @@ const ProductsPage = () => {
         <h2 className='section_title text-center text-2xl lg:text-3xl font-bold mb-2 text-[#0A400C] relative'>Products</h2>
         <p className='text-lg lg:text-xl font-medium text-center lg:w-162.5 mx-auto mb-15 px-2 md:px-2 lg:px-0'>Lorem Ipsum has been the industry's standard dummy text, when an unknown printer took a galley of type and scrambled it</p>
         <div className='grid gap-3.75 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 md:px-10 lg:px-10 xl:px-0'>
-          {productData.map((product) => (
-            <div key={product.id} className='p-3 rounded-sm border border-gray-600 cursor-pointer group hoverr:bg-[#0a400C]/75 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl'>
-              <div className='object-cover transition-transform duration-300 group-hover:scale-104 relative'>
-                <img className='rounded-sm' src={product.image} alt="product_image" />
-                <div className='absolute top-2 left-2 hidden group-hover:block'>
-                  <button 
-                    onClick={() => addItems(product)}
-                    className='shadow-[0_15px_15px_rgba(0,0,0,0.10)] bg-[#0a400C]/75 text-white p-1 text-md font-semibold rounded-md cursor-pointer'>
-                    Add To Cart
-                  </button>
+          {
+            loadedProducts.map((product) => (
+              <div key={product.id} className='p-3 rounded-sm border border-gray-600 cursor-pointer group hoverr:bg-[#0a400C]/75 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl'>
+                <div className='object-cover transition-transform duration-300 group-hover:scale-102 relative'>
+                  <img className='rounded-sm' src={product.image} alt="product_image" />
+                  <div className='absolute top-2 left-2 hidden group-hover:block'>
+                    <button 
+                      onClick={() => addItems(product)}
+                      className='shadow-[0_15px_15px_rgba(0,0,0,0.10)] bg-[#0a400C]/75 text-white p-1 text-md font-semibold rounded-md cursor-pointer'>
+                      Add To Cart
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <div className='flex justify-between items-center mt-2'>
+                    <h3 className='my-2 text-xl font-bold text-[#0A400C] group-hoverr:text-white'>{product.name}</h3>
+                    <h2 className='text-xl font-bold text-[#0A400C] group-hoverr:text-white'>{product.price}$</h2>
+                  </div>
+
+                  <div className='flex gap-1 items-center text-xl'>
+                    <h4 className='text-md md:text-lg lg:text-lg font-medium text-gray-600 group-hoverr:text-white'>Average Rating:</h4>
+                    {
+                      [1,2,3,4,5].map((star) => (
+                        <span key={star}>
+                          {
+                            star <= product.rating ? <FaStar className='text-green-900 text-lg md:text-xl lg:text-xl group-hoverr:text-white'/> : <FaRegStar className='text-lg md:text-xl lg:text-xl group-hoverr:text-white'/>
+                          }
+                        </span>
+                      ))
+                    }
+                  </div>
+
+                  <h3 className='mt-2 font-bold group-hoverr:text-white'> <span className='italic font-medium'>Max Discount: </span>{product.discount}%</h3>
+
+                  <div className="mt-4 border-t-2 border-dashed border-gray-600 group-hoverr:border-white"></div>
+
+                  <div className='mt-4 mb-2'>
+                    <button onClick={
+                      ()=>{
+                        setSelectedProduct(product);
+                        document.getElementById('detailsModal').showModal()
+                      }}
+                      className='bg-transparent text-gray-800 border-2 border-[#0A400C] rounded-lg p-2 cursor-pointer group-hover:bg-[#0A400C] group-hover:text-white transition-all duration-300'>
+                        View Details
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div>
-                <div className='flex justify-between items-center mt-2'>
-                  <h3 className='my-2 text-xl font-bold text-[#0A400C] group-hoverr:text-white'>{product.name}</h3>
-                  <h2 className='text-xl font-bold text-[#0A400C] group-hoverr:text-white'>{product.price}$</h2>
-                </div>
-
-                <div className='flex gap-1 items-center text-xl'>
-                  <h4 className='text-md md:text-lg lg:text-lg font-medium text-gray-600 group-hoverr:text-white'>Average Rating:</h4>
-                  {[1,2,3,4,5].map((star) => (
-                    <span key={star}>
-                      {
-                        star <= product.rating ? <FaStar className='text-green-900 text-lg md:text-xl lg:text-xl group-hoverr:text-white'/> : <FaRegStar className='text-lg md:text-xl lg:text-xl group-hoverr:text-white'/>
-                      }
-                    </span>
-                  ))}
-                </div>
-
-                <h3 className='mt-2 font-bold group-hoverr:text-white'> <span className='italic font-medium'>Max Discount: </span>{product.discount}%</h3>
-                <div className="mt-4 border-t-2 border-dashed border-gray-600 group-hoverr:border-white"></div>
-
-                <div className='mt-4 mb-2'>
-                  <button onClick={
-                    ()=>{
-                      setSelectedProduct(product);
-                      document.getElementById('detailsModal').showModal()
-                    }}
-                    className='bg-transparent text-gray-800 border-2 border-[#0A400C] rounded-lg p-2 cursor-pointer group-hover:bg-[#0A400C] group-hover:text-white transition-all duration-300'>
-                      View Details
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
 
         <dialog id="detailsModal" className="modal">
