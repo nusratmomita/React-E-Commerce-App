@@ -41,7 +41,7 @@
         width: 50px;
         height: 2px;
         background: rgb(0,0,12);
-        top: 60%;
+        top: 50%;
     }
     
     .section_title::before{

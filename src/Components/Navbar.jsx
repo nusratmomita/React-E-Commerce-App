@@ -33,17 +33,17 @@ const Navbar = () => {
           <ul
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 z-1 mt-3 w-52 p-2 shadow">
-            <li className='font-bold hover:bg-none'> <NavLink className="text-lg" to='/'>All Products</NavLink></li>
+            <li className='font-bold'> <NavLink className="text-lg hover:bg-white" to='/'>All Products</NavLink></li>
           </ul>
         </div>
-        <div className='flex justify-center items-center'>
+        <div className='flex justify-center items-center cursor-pointer'>
           <img className='w-12 h-12 -mr-1 hidden lg:block' src={siteLogo} alt="siteLogo" />
           <a className="text-xl font-bold italic text-[#0A400C]">Shopify</a>
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li className='text-xl font-bold'> <NavLink to='/'>All Products</NavLink></li>
+        <ul className="menu menu-horizontal px-1 ">
+          <li className='text-xl font-bold'> <NavLink className="hover:bg-white" to='/'>All Products</NavLink></li>
         </ul>
       </div>
       <div className="navbar-end">

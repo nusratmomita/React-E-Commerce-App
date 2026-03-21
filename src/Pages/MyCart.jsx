@@ -6,6 +6,7 @@ import { FiMinus } from "react-icons/fi";
 import { PiShoppingCartBold } from "react-icons/pi";
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router';
+import { IoBagCheckOutline } from "react-icons/io5"; 
 
 const MyCart = () => {
 
@@ -107,7 +108,7 @@ const MyCart = () => {
                     <td className="text-lg flex gap-2 justify-center items-center">
                       <button 
                         onClick={() => handleDelete(item.productId)} 
-                        className="btn btn-md bg-[#0A400C] text-white border border-transparent hover:border-[#0A400C] hover:bg-transparent hover:text-[#0A400C] hover:-translate-y-2 transition-all duration-300 group"
+                        className="btn btn-md bg-[#0A400C] text-white border border-transparent hover:border-[#0A400C] hover:bg-transparent hover:text-[#0A400C] transition-all duration-300 group"
                       >
                         <IoTrashBinOutline className='group-hover:rotate-18'></IoTrashBinOutline>
                         Delete
@@ -118,14 +119,19 @@ const MyCart = () => {
                 )}
               <tr className="font-bold text-lg bg-gray-200">
                 <td colSpan="1" className="text-left">Total</td>
-                <td colSpan="6" className="text-right">${totalPrice}</td>
-                {/* <td colSpan="4"></td> */}
+                <td colSpan="5" className="text-right">${totalPrice}</td>
               </tr>
             </tbody>
             </table>
           </div>
         </>
       }
+
+      <div className='flex justify-center items-center mt-20'>
+        <button className='btn btn-lg rounded-lg text-[#0A400C] bg-white border border-[#0A400C] hover:border-[#0A400C] hover:bg-[#0A400C] hover:text-white transition-all duration-300'>
+          <IoBagCheckOutline className='text-md'></IoBagCheckOutline> Processed To Checkout 
+        </button>
+      </div>
 
     </div>
   )

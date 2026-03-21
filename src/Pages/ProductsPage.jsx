@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useLoaderData } from 'react-router'
 import { FaStar } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa";
-import { addToLS } from '../Utilities/localStorageUtility';
+import { addToLS, getItemsFromLS } from '../Utilities/localStorageUtility';
 import { toast, ToastContainer } from 'react-toastify';
 
 const ProductsPage = () => {
@@ -10,7 +10,7 @@ const ProductsPage = () => {
   // console.log(productData);
 
   // for changing the stock number
-  const [loadedProducts,setLoadedProducts] = useState(productData);
+  const cartItems = getItemsFromLS();
 
   // for details modal
   const [selectedProduct,setSelectedProduct] = useState(null);
@@ -31,6 +31,7 @@ const ProductsPage = () => {
     }
 
     const addingItem = addToLS(newItem);
+
     window.dispatchEvent(new Event("cartUpdated"));
 
     if(!addingItem){
@@ -39,20 +40,12 @@ const ProductsPage = () => {
 
     else{
       toast.success("You successfully added a new item!");
-
-      const updateProductStock = loadedProducts.map((p) => {
-        if(p.id === product.id){
-          return{...p , stock: p.stock - 1};
-        }
-        return p;
-      });
-
-      setLoadedProducts(updateProductStock);
-
-      setSelectedProduct((prev) =>
-        prev ? { ...prev, stock: prev.stock - 1 } : prev
-      );
     }
+  }
+
+  const getProductQuantity = (id) => {
+    const item = cartItems.find((item) => item.productId === id);
+    return item ? item.productQuantity : 0;
   }
 
  return (
@@ -63,7 +56,7 @@ const ProductsPage = () => {
         <p className='text-lg lg:text-xl font-medium text-center lg:w-162.5 mx-auto mb-15 px-2 md:px-2 lg:px-0'>Lorem Ipsum has been the industry's standard dummy text, when an unknown printer took a galley of type and scrambled it</p>
         <div className='grid gap-3.75 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 md:px-10 lg:px-10 xl:px-0'>
           {
-            loadedProducts.map((product) => (
+            productData.map((product) => (
               <div key={product.id} className='p-3 rounded-sm border border-gray-600 cursor-pointer group hoverr:bg-[#0a400C]/75 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl'>
                 <div className='object-cover transition-transform duration-300 group-hover:scale-102 relative'>
                   <img className='rounded-sm' src={product.image} alt="product_image" />
@@ -138,7 +131,7 @@ const ProductsPage = () => {
 
                 <h3 className='font-semibold text-md md:text-lg lg:text-lg text-[#0A400C]'>Vendor: <span className='text-black font-normal not-italic'>{selectedProduct.vendor_company}</span></h3>
 
-                <h3 className='font-semibold text-md md:text-lg lg:text-lg mb-5 text-[#0A400C]'>In stock: <span className='text-black font-normal not-italic'>{selectedProduct.stock}</span></h3>
+                <h3 className='font-semibold text-md md:text-lg lg:text-lg mb-5 text-[#0A400C]'>In stock: <span className='text-black font-normal not-italic'>{selectedProduct.stock - getProductQuantity(selectedProduct.id)}</span></h3>
 
                 <form method="dialog" className='flex gap-3'>
                   <button 
