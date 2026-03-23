@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLoaderData } from 'react-router'
 import { FaStar } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa";
@@ -9,16 +9,32 @@ const ProductsPage = () => {
   const productData = useLoaderData();
   // console.log(productData);
 
-  // for changing the stock number
-  const cartItems = getItemsFromLS();
+  // for showing updated stock number
+  const [cartProducts,setCartProducts] = useState(getItemsFromLS());
+  
 
   // for details modal
   const [selectedProduct,setSelectedProduct] = useState(null);
 
+
+  useEffect(() => {
+    const handleCartUpdate = () => {
+      setCartProducts(getItemsFromLS());
+    };
+
+    window.addEventListener("cartUpdated", handleCartUpdate);
+
+    return () => {
+      window.removeEventListener("cartUpdated", handleCartUpdate);
+    };
+  }, []);
+
   const addItems = (product) => {
 
-    if(product.stock <= 0){
-      toast.error("This product is out of stock right now.")
+    const cartQty = getProductQuantity(product.id);
+
+    if(product.stock - cartQty <= 0){
+      toast.error("This product is out of stock right now.");
       return;
     }
 
@@ -40,13 +56,17 @@ const ProductsPage = () => {
 
     else{
       toast.success("You successfully added a new item!");
+      setCartProducts(getItemsFromLS());
     }
+
+    window.dispatchEvent(new Event("cartUpdated"));
   }
 
   const getProductQuantity = (id) => {
-    const item = cartItems.find((item) => item.productId === id);
+    const item = cartProducts.find((item) => item.productId === id);
     return item ? item.productQuantity : 0;
   }
+
 
  return (
     <>
@@ -57,7 +77,7 @@ const ProductsPage = () => {
         <div className='grid gap-3.75 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 md:px-10 lg:px-10 xl:px-0'>
           {
             productData.map((product) => (
-              <div key={product.id} className='p-3 rounded-sm border border-gray-600 cursor-pointer group hoverr:bg-[#0a400C]/75 hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl'>
+              <div key={product.id} className='p-3 rounded-sm border border-gray-600 cursor-pointer hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl'>
                 <div className='object-cover transition-transform duration-300 group-hover:scale-102 relative'>
                   <img className='rounded-sm' src={product.image} alt="product_image" />
                   <div className='absolute top-2 left-2 hidden group-hover:block'>
@@ -70,26 +90,26 @@ const ProductsPage = () => {
                 </div>
                 <div>
                   <div className='flex justify-between items-center mt-2'>
-                    <h3 className='my-2 text-xl font-bold text-[#0A400C] group-hoverr:text-white'>{product.name}</h3>
-                    <h2 className='text-xl font-bold text-[#0A400C] group-hoverr:text-white'>{product.price}$</h2>
+                    <h3 className='my-2 text-xl font-bold text-[#0A400C]'>{product.name}</h3>
+                    <h2 className='text-xl font-bold text-[#0A400C]'>{product.price}$</h2>
                   </div>
 
                   <div className='flex gap-1 items-center text-xl'>
-                    <h4 className='text-md md:text-lg lg:text-lg font-medium text-gray-600 group-hoverr:text-white'>Average Rating:</h4>
+                    <h4 className='text-md md:text-lg lg:text-lg font-medium text-gray-600'>Average Rating:</h4>
                     {
                       [1,2,3,4,5].map((star) => (
                         <span key={star}>
                           {
-                            star <= product.rating ? <FaStar className='text-green-900 text-lg md:text-xl lg:text-xl group-hoverr:text-white'/> : <FaRegStar className='text-lg md:text-xl lg:text-xl group-hoverr:text-white'/>
+                            star <= product.rating ? <FaStar className='text-green-900 text-lg md:text-xl lg:text-xl'/> : <FaRegStar className='text-lg md:text-xl lg:text-xl group-hoverr:text-white'/>
                           }
                         </span>
                       ))
                     }
                   </div>
 
-                  <h3 className='mt-2 font-bold group-hoverr:text-white'> <span className='italic font-medium'>Max Discount: </span>{product.discount}%</h3>
+                  <h3 className='mt-2 font-bold'> <span className='italic font-medium'>Max Discount: </span>{product.discount}%</h3>
 
-                  <div className="mt-4 border-t-2 border-dashed border-gray-600 group-hoverr:border-white"></div>
+                  <div className="mt-4 border-t-2 border-dashed border-gray-600"></div>
 
                   <div className='mt-4 mb-2'>
                     <button onClick={

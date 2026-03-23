@@ -68,7 +68,7 @@ const MyCart = () => {
   
   const totalPrice = allCartItems.reduce((total,item) => total + item.productQuantity * item.productPrice , 0 );
 
-  console.log(totalPrice)
+  // console.log(totalPrice)
   
   return (
     <div>
@@ -96,16 +96,22 @@ const MyCart = () => {
                 {
                   allCartItems.map((item,index) => (
                   <tr key={item.productId}>
-                    <td className='text-lg text-center'>{index+1}</td>
+                    <td className='whitespace-nowrap text-lg text-center'>{index+1}</td>
                     <td className='text-lg text-center whitespace-nowrap'>{item.productName}</td>
                     <td className='text-lg text-center whitespace-nowrap'>{item.productPrice*item.productQuantity}</td>
-                    <td className='text-lg flex justify-center items-center gap-2'>
-                      <FiMinus onClick={() => updateQuantity(item.productId , "decrease")} className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-2xl p-1'></FiMinus>
-                      <span>{item.productQuantity}</span>
-                      <FaPlus onClick={() => updateQuantity(item.productId , "increase")} className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-2xl p-1'></FaPlus>
+                    <td className='text-lg text-center whitespace-nowrap'>
+                      <div className='flex justify-center items-center gap-2 whitespace-nowrap'>
+                        <span>
+                          <FiMinus onClick={() => updateQuantity(item.productId , "decrease")} className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-xl lg:text-2xl p-1'></FiMinus>
+                        </span>
+                        <span>{item.productQuantity}</span>
+                        <span>
+                          <FaPlus onClick={() => updateQuantity(item.productId , "increase")} className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-xl lg:text-2xl p-1'></FaPlus>
+                        </span>
+                      </div>
                     </td>
                     <td className='text-lg text-center whitespace-nowrap'>{item.addedOn}</td>
-                    <td className="text-lg flex gap-2 justify-center items-center">
+                    <td className="text-lg flex gap-2 justify-center items-center whitespace-nowrap">
                       <button 
                         onClick={() => handleDelete(item.productId)} 
                         className="btn btn-md bg-[#0A400C] text-white border border-transparent hover:border-[#0A400C] hover:bg-transparent hover:text-[#0A400C] transition-all duration-300 group"
@@ -133,7 +139,7 @@ const MyCart = () => {
         :
         <div className='flex justify-center items-center mt-20'>
           <button className='btn btn-lg rounded-lg text-[#0A400C] bg-white border border-[#0A400C] hover:border-[#0A400C] hover:bg-[#0A400C] hover:text-white transition-all duration-300'>
-            <IoBagCheckOutline className='text-md'></IoBagCheckOutline> Processed To Checkout 
+            <IoBagCheckOutline className='text-md'></IoBagCheckOutline> Process To Checkout 
           </button>
         </div>
 
