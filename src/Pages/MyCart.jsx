@@ -126,12 +126,18 @@ const MyCart = () => {
           </div>
         </>
       }
+      
+      {
+        allCartItems.length === 0 ? 
+        <></>
+        :
+        <div className='flex justify-center items-center mt-20'>
+          <button className='btn btn-lg rounded-lg text-[#0A400C] bg-white border border-[#0A400C] hover:border-[#0A400C] hover:bg-[#0A400C] hover:text-white transition-all duration-300'>
+            <IoBagCheckOutline className='text-md'></IoBagCheckOutline> Processed To Checkout 
+          </button>
+        </div>
 
-      <div className='flex justify-center items-center mt-20'>
-        <button className='btn btn-lg rounded-lg text-[#0A400C] bg-white border border-[#0A400C] hover:border-[#0A400C] hover:bg-[#0A400C] hover:text-white transition-all duration-300'>
-          <IoBagCheckOutline className='text-md'></IoBagCheckOutline> Processed To Checkout 
-        </button>
-      </div>
+      }
 
     </div>
   )
