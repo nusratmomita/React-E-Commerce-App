@@ -7,6 +7,7 @@ import { PiShoppingCartBold } from "react-icons/pi";
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router';
 import { IoBagCheckOutline } from "react-icons/io5"; 
+import { toast, ToastContainer } from 'react-toastify';
 
 const MyCart = () => {
 
@@ -49,10 +50,18 @@ const MyCart = () => {
     const updateItems = allCartItems.map((item) => {
       if(item.productId === productId){
         if(type === 'increase'){
+          if(item.productQuantity >= item.productInStock){
+            toast.error("Stock limit will be exceeded.");
+            return item;
+          }
           return {...item , productQuantity: item.productQuantity + 1}
         }
 
-        if(type === 'decrease' && item.productQuantity > 1){
+        if(type === 'decrease'){
+          if(item.productQuantity <= 1){
+            toast.error("Minimum quantity is 1. Remove item if needed.")
+            return item;
+          }
           return {...item , productQuantity: item.productQuantity - 1}
         }
       }
@@ -72,6 +81,7 @@ const MyCart = () => {
   
   return (
     <div>
+      <ToastContainer position="bottom-left"></ToastContainer>
       {
         allCartItems.length === 0 ?
         <div className='mt-30 lg:mt-50 flex flex-col justify-center items-center'>
