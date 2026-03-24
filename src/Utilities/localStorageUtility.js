@@ -14,20 +14,18 @@ export const getItemsFromLS = () => {
 export const addToLS = (item) => {
     const existingItems = getItemsFromLS();
 
-    const duplicate = existingItems.find((i) => i.productName === item.productName);
+    const index = existingItems.findIndex((i) => i.productId === item.productId);
 
-    if(duplicate){
-        return false;
+    if(index !== -1){
+        existingItems[index].productQuantity += 1; 
     }
-
     else{
         existingItems.push(item);
-
-        const addingToLS = JSON.stringify(existingItems);
-        localStorage.setItem("items" , addingToLS);
-
-        return existingItems;
     }
+
+    localStorage.setItem("items" , JSON.stringify(existingItems));
+
+    return existingItems;
 }
 
 export const removingFromLS = (productId) => {
