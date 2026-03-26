@@ -17,10 +17,7 @@ const ProductsPage = () => {
   const [selectedProduct,setSelectedProduct] = useState(null);
 
   // for range price
-  const [priceRange,setPriceRange] = useState({
-    min: 0,
-    max:1000
-  });
+  const [priceRange,setPriceRange] = useState({ min: 0, max:1000 });
 
 
   useEffect(() => {
@@ -109,35 +106,57 @@ const ProductsPage = () => {
     return product.price >= priceRange.min && product.price <= priceRange.max;
   })
 
-  const percentage = (priceRange.max / 1000) * 100;
-
-
  return (
     <>
       <ToastContainer position="bottom-left"></ToastContainer>
       <div className='my-15'>
         <h2 className='section_title text-center text-2xl lg:text-3xl font-bold mb-2 text-[#0A400C] relative'>Products</h2>
         <p className='text-lg lg:text-xl font-medium text-center lg:w-162.5 mx-auto mb-15 px-2 md:px-2 lg:px-0'>Lorem Ipsum has been the industry's standard dummy text, when an unknown printer took a galley of type and scrambled it</p>
-        <div className="w-75">
-          <input
-            type="range"
-            min="0"
-            max="1000"
-            value={priceRange.max}
-            onChange={(e) =>
-              setPriceRange({ ...priceRange, max: Number(e.target.value) })
-            }
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#0A400C]"
-            style={{
-            background: `linear-gradient(to right, #0A400C ${percentage}%, #e5e7eb ${percentage}%)`
-          }}
-          />
-          <label className="block mb-2 font-semibold text-gray-700 whitespace-nowrap">
-            Max Price: 
+        <div className="w-75 mb-15">
+          <div className="relative h-2 bg-gray-200 rounded-lg">
+            <input
+              type="range"
+              min="0"
+              max="1000"
+              value={priceRange.min}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                if (value <= priceRange.max) {
+                  setPriceRange({ ...priceRange, min: value });
+                }
+              }}
+              className="absolute w-full h-2 appearance-none bg-transparent"
+            />
+
+            <input
+              type="range"
+              min="0"
+              max="1000"
+              value={priceRange.max}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                if (value >= priceRange.min) {
+                  setPriceRange({ ...priceRange, max: value });
+                }
+              }}
+              className="absolute w-full h-2 appearance-none bg-transparent"
+            />
+          
+            <div
+              className="absolute h-2 bg-[#0A400C] rounded-lg"
+              style={{
+                left: `${(priceRange.min / 1000) * 100}%`,
+                right: `${100 - (priceRange.max / 1000) * 100}%`
+              }}
+            ></div>
+          </div>
+
+          <p className="mt-2 font-semibold text-gray-700">
+            Price:
             <span className="ml-1 text-[#0A400C] font-bold">
-              ${priceRange.max}
+              ${priceRange.min} - ${priceRange.max}
             </span>
-          </label>
+          </p>
         </div>
         <div className='grid gap-3.75 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 md:px-10 lg:px-10 xl:px-0'>
           {

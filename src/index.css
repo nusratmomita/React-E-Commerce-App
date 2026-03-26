@@ -8,6 +8,31 @@
 }
 
 
+/* Disable track interaction */
+input[type="range"] {
+  pointer-events: none;
+}
+
+/* Enable ONLY thumb interaction */
+input[type="range"]::-webkit-slider-thumb {
+  pointer-events: all;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  background: #0A400C;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  pointer-events: all;
+  height: 16px;
+  width: 16px;
+  background: #0A400C;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 
 /* 0A400C -> dark green */
 
