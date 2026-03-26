@@ -108,7 +108,7 @@ const MyCart = () => {
                   <tr key={item.productId}>
                     <td className='whitespace-nowrap text-lg text-center'>{index+1}</td>
                     <td className='text-lg text-center whitespace-nowrap'>{item.productName}</td>
-                    <td className='text-lg text-center whitespace-nowrap'>{item.productPrice*item.productQuantity}</td>
+                    <td className='text-lg text-center whitespace-nowrap'>{item.productPrice}</td>
                     <td className='text-lg text-center whitespace-nowrap'>
                       <div className='flex justify-center items-center gap-2 whitespace-nowrap'>
                         <span>
