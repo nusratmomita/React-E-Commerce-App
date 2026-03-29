@@ -112,116 +112,119 @@ const ProductsPage = () => {
       <div className='my-15'>
         <h2 className='section_title text-center text-2xl lg:text-3xl font-bold mb-2 text-[#0A400C] relative'>Products</h2>
         <p className='text-lg lg:text-xl font-medium text-center lg:w-162.5 mx-auto mb-15 px-2 md:px-2 lg:px-0'>Lorem Ipsum has been the industry's standard dummy text, when an unknown printer took a galley of type and scrambled it</p>
-        <div className="w-75 mb-15">
-          <div className="relative h-2 bg-gray-200 rounded-lg">
-            <input
-              type="range"
-              min="0"
-              max="1000"
-              value={priceRange.min}
-              onChange={(e) => {
-                const value = Number(e.target.value);
-                if (value <= priceRange.max) {
-                  setPriceRange({ ...priceRange, min: value });
-                }
-              }}
-              className="absolute w-full h-2 appearance-none bg-transparent"
-            />
 
-            <input
-              type="range"
-              min="0"
-              max="1000"
-              value={priceRange.max}
-              onChange={(e) => {
-                const value = Number(e.target.value);
-                if (value >= priceRange.min) {
-                  setPriceRange({ ...priceRange, max: value });
-                }
-              }}
-              className="absolute w-full h-2 appearance-none bg-transparent"
-            />
-          
-            <div
-              className="absolute h-2 bg-[#0A400C] rounded-lg"
-              style={{
-                left: `${(priceRange.min / 1000) * 100}%`,
-                right: `${100 - (priceRange.max / 1000) * 100}%`
-              }}
-            ></div>
-          </div>
-
-          <p className="mt-2 font-semibold text-gray-700">
-            Price:
-            <span className="ml-1 text-[#0A400C] font-bold">
-              ${priceRange.min} - ${priceRange.max}
-            </span>
-          </p>
-        </div>
-        <div className='grid gap-3.75 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 md:px-10 lg:px-10 xl:px-0'>
-          {
-            filteredProducts.map((product) => (
-              <div key={product.id} className='cursor-pointer transition-all duration-300 hover:shadow-lg group'>
-                <div className='object-cover relative'>
-                  <img className='rounded-2xl' src={product.image} alt="product_image" />
-                  {
-                    getProductQuantity(product.id) === 0 ?
-                      <div className='absolute top-4 left-4'>
-                        <button 
-                          onClick={() => addItems(product)}
-                          className='shadow-[0_15px_15px_rgba(0,0,0,0.10)] bg-[#0a400C] text-white px-4 py-1 text-sm font-medium rounded-2xl cursor-pointer'>
-                          Add To Cart
-                        </button>
-                      </div>
-                      :
-                      <div className='bg-[#0a400C] flex justify-center items-center gap-2 whitespace-nowrap absolute top-4 left-4  px-4 py-1 text-sm font-medium rounded-2xl'>
-                        <span>
-                          <FiMinus onClick={() => updateQuantity(product.id, "decrease")} className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-xl p-1'></FiMinus>
-                        </span>
-                        <span className='text-lg text-white'>{getProductQuantity(product.id)}</span>
-                        <span>
-                          <FaPlus onClick={() => updateQuantity(product.id, "increase")} className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-xl p-1'></FaPlus>
-                        </span>
-                      </div>
+        <div className='flex flex-col lg:flex-row gap-10 xl:gap-20'>
+          <div className="w-full px-10 md:px-10 lg:px-10 xl:px-0">
+            <div className="relative h-2 bg-gray-200 rounded-lg">
+              <input
+                type="range"
+                min="0"
+                max="1000"
+                value={priceRange.min}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  if (value <= priceRange.max) {
+                    setPriceRange({ ...priceRange, min: value });
                   }
-                </div>
-                <div className='p-3 shadow-[0_5px_5px_rgba(0,0,0,0.10)] rounded-md'>
-                  <div className='flex justify-between items-center mt-2'>
-                    <h3 className='my-2 text-xl font-bold text-[#0A400C]'>{product.name}</h3>
-                    <h2 className='text-xl font-bold text-[#0A400C]'>{product.price}$</h2>
-                  </div>
+                }}
+                className="absolute w-full h-2 appearance-none bg-transparent"
+              />
 
-                  <div className='flex gap-1 items-center text-xl'>
-                    <h4 className='text-md md:text-lg lg:text-lg font-medium text-[#0A400C]'>Average Rating:</h4>
+              <input
+                type="range"
+                min="0"
+                max="1000"
+                value={priceRange.max}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  if (value >= priceRange.min) {
+                    setPriceRange({ ...priceRange, max: value });
+                  }
+                }}
+                className="absolute w-full h-2 appearance-none bg-transparent"
+              />
+            
+              <div
+                className="absolute h-2 bg-[#0A400C] rounded-lg"
+                style={{
+                  left: `${(priceRange.min / 1000) * 100}%`,
+                  right: `${100 - (priceRange.max / 1000) * 100}%`
+                }}
+              ></div>
+            </div>
+
+            <p className="mt-2 font-semibold text-gray-700 whitespace-nowrap">
+              Price:
+              <span className="ml-1 text-[#0A400C] font-bold">
+                ${priceRange.min} - ${priceRange.max}
+              </span>
+            </p>
+          </div>
+          <div className='grid gap-3.75 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 px-10 md:px-10 lg:px-10 xl:px-0'>
+            {
+              filteredProducts.map((product) => (
+                <div key={product.id} className='cursor-pointer transition-all duration-300 hover:shadow-lg group'>
+                  <div className='object-cover relative'>
+                    <img className='rounded-2xl' src={product.image} alt="product_image" />
                     {
-                      [1,2,3,4,5].map((star) => (
-                        <span key={star}>
-                          {
-                            star <= product.rating ? <FaStar className='text-green-900 text-lg md:text-xl lg:text-xl'/> : <FaRegStar className='text-lg md:text-xl lg:text-xl'/>
-                          }
-                        </span>
-                      ))
+                      getProductQuantity(product.id) === 0 ?
+                        <div className='absolute top-4 left-4'>
+                          <button 
+                            onClick={() => addItems(product)}
+                            className='shadow-[0_15px_15px_rgba(0,0,0,0.10)] bg-[#0a400C] text-white px-4 py-1 text-sm font-medium rounded-2xl cursor-pointer'>
+                            Add To Cart
+                          </button>
+                        </div>
+                        :
+                        <div className='bg-[#0a400C] flex justify-center items-center gap-2 whitespace-nowrap absolute top-4 left-4  px-4 py-1 text-sm font-medium rounded-2xl'>
+                          <span>
+                            <FiMinus onClick={() => updateQuantity(product.id, "decrease")} className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-xl p-1'></FiMinus>
+                          </span>
+                          <span className='text-lg text-white'>{getProductQuantity(product.id)}</span>
+                          <span>
+                            <FaPlus onClick={() => updateQuantity(product.id, "increase")} className='bg-gray-200 rounded-sm text-gray-800 cursor-pointer text-xl p-1'></FaPlus>
+                          </span>
+                        </div>
                     }
                   </div>
+                  <div className='p-3 shadow-[0_5px_5px_rgba(0,0,0,0.10)] rounded-md'>
+                    <div className='flex justify-between items-center mt-2'>
+                      <h3 className='my-2 text-xl font-bold text-[#0A400C]'>{product.name}</h3>
+                      <h2 className='text-xl font-bold text-[#0A400C]'>{product.price}$</h2>
+                    </div>
 
-                  <h3 className='mt-2 font-bold'> <span className='font-medium text-[#0A400C]'>Max Discount: </span>{product.discount}%</h3>
+                    <div className='flex gap-1 items-center text-xl'>
+                      <h4 className='text-md md:text-lg lg:text-lg font-medium text-[#0A400C]'>Average Rating:</h4>
+                      {
+                        [1,2,3,4,5].map((star) => (
+                          <span key={star}>
+                            {
+                              star <= product.rating ? <FaStar className='text-green-900 text-lg md:text-xl lg:text-xl'/> : <FaRegStar className='text-lg md:text-xl lg:text-xl'/>
+                            }
+                          </span>
+                        ))
+                      }
+                    </div>
 
-                  <div className="mt-4 border-t-2 border-dashed border-gray-600"></div>
+                    <h3 className='mt-2 font-bold'> <span className='font-medium text-[#0A400C]'>Max Discount: </span>{product.discount}%</h3>
 
-                  <div className='mt-4 mb-2'>
-                    <button onClick={
-                      ()=>{
-                        setSelectedProduct(product);
-                        document.getElementById('detailsModal').showModal()
-                      }}
-                      className='bg-transparent text-[#0A400C] border border-[#0A400C] w-full py-2 text-md font-medium rounded-3xl cursor-pointer group-hover:bg-[#0A400C] group-hover:text-white transition-all duration-300'>
-                        View Details
-                    </button>
+                    <div className="mt-4 border-t-2 border-dashed border-gray-600"></div>
+
+                    <div className='mt-4 mb-2'>
+                      <button onClick={
+                        ()=>{
+                          setSelectedProduct(product);
+                          document.getElementById('detailsModal').showModal()
+                        }}
+                        className='bg-transparent text-[#0A400C] border border-[#0A400C] w-full py-2 text-md font-medium rounded-3xl cursor-pointer group-hover:bg-[#0A400C] group-hover:text-white transition-all duration-300'>
+                          View Details
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-          }
+              ))
+            }
+          </div>
         </div>
 
         <dialog id="detailsModal" className="modal">
